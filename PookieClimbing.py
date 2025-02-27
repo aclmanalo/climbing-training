@@ -22,7 +22,7 @@ cursor.execute('''
 conn.commit()
 
 # Title
-st.title("🏋️‍♂️ Climbing Training Log")
+st.title("Pookie's Training Log")
 
 # User input for new workout entry
 st.write("### Add a New Workout Entry")
@@ -51,7 +51,7 @@ if st.button("Add Entry"):
             (workout_date.strftime("%Y-%m-%d"), exercise, reps, sets, rpe)
         )
         conn.commit()
-        st.success(f"Workout entry for {workout_date} added!")
+        st.success(f"Workout entry for {workout_date} added! Good job Pookie!")
 
 # Fetch and display past workout logs
 df = pd.read_sql("SELECT * FROM workouts", conn)
