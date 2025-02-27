@@ -1,4 +1,31 @@
 import streamlit as st
+import pandas as pd
 
 st.title("Climbing Training Log")
 st.write("Tracking Climbing Training Progress")
+
+# Title
+st.title("🏋️‍♂️ One-Rep Max (1RM) Tracker")
+
+# Define initial 1RM values
+if "one_rep_max" not in st.session_state:
+    st.session_state.one_rep_max = {
+        "Squat": 100,
+        "Bench Press": 80,
+        "Deadlift": 120,
+        "Overhead Press": 60
+    }
+
+# Convert to DataFrame
+df = pd.DataFrame(list(st.session_state.one_rep_max.items()), columns=["Exercise", "1RM (kg)"])
+
+# Editable table
+st.write("### Your 1RM Table")
+edited_df = st.data_editor(df, key="editable_table")
+
+# Update session state
+if st.button("Save Changes"):
+    for index, row in edited_df.iterrows():
+        st.session_state.one_rep_max[row["Exercise"]] = row["1RM (kg)"]
+    st.success("1RM values updated!")
+
