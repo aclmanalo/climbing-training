@@ -8,8 +8,6 @@ from datetime import date
 conn = sqlite3.connect("new_training_log.db")
 cursor = conn.cursor()
 
-# Add the date column if it's missing
-cursor.execute("ALTER TABLE workouts ADD COLUMN date TEXT")
 
 # Create a table if it doesn’t exist
 cursor.execute('''
