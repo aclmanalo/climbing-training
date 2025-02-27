@@ -59,10 +59,6 @@ df = pd.read_sql("SELECT * FROM workouts", conn)
 # Convert date column to proper format
 df["date"] = pd.to_datetime(df["date"])
 
-# Display the table with past workouts
-st.write("### Training Log")
-st.data_editor(df.drop(columns=["id"]), key="training_table", hide_index=True)
-
 # --- Search and Filter Section ---
 st.write("### Search Workouts")
 
