@@ -46,7 +46,7 @@ with col5:
 # Add entry button
 if st.button("Add Entry"):
     if exercise:
-        cursor.execute("INSERT INTO workouts (date, exercise, reps, sets, rpe) VALUES (?, ?, ?, ?, ?)", 
+        cursor.execute("INSERT INTO workouts (exercise, reps, sets, rpe, date) VALUES (?, ?, ?, ?, ?)", 
                        (workout_date, exercise, reps, sets, rpe))
         conn.commit()
         st.success(f"Workout entry added for {workout_date}!")
