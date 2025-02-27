@@ -10,6 +10,7 @@ cursor = conn.cursor()
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS workouts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date TEXT,
         exercise TEXT,
         reps INTEGER,
         sets INTEGER,
@@ -17,6 +18,7 @@ cursor.execute('''
     )
 ''')
 conn.commit()
+
 
 # Title
 st.title("🏋️‍♂️ Training Log with SQLite")
@@ -36,6 +38,10 @@ with col3:
 
 with col4:
     rpe = st.number_input("RPE", min_value=1, max_value=10, step=1)
+
+with col5:
+    workout_date = st.date_input("Date", date.today())  # Default to today's date
+
 
 # Add entry button
 if st.button("Add Entry"):
