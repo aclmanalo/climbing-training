@@ -54,32 +54,3 @@ if st.button("Add Entry"):
 st.markdown("<br><br>", unsafe_allow_html=True)  # Adds two line breaks
 
 
-
-# Title
-st.title("History")
-
-# Fetch data from database
-df = pd.read_sql("SELECT * FROM workouts", conn)
-
-# Filter options
-st.write("### View Past Workouts")
-
-# Search by exercise name
-search_term = st.text_input("🔍 Search Exercise", "").strip().lower()
-filtered_df = df.copy()
-
-if search_term:
-    filtered_df = filtered_df[filtered_df["exercise"].str.lower().str.contains(search_term, na=False)]
-
-# Sort by date (Newest First by default)
-filtered_df["date"] = pd.to_datetime(filtered_df["date"])
-filtered_df = filtered_df.sort_values(by="date", ascending=False)
-
-# Display the updated log
-st.data_editor(filtered_df.drop(columns=["id"]), key="training_table", hide_index=True)
-
-# Option to clear all logs
-if st.button("Clear Log"):
-    cursor.execute("DELETE FROM workouts")
-    conn.commit()
-    st.warning("Training log cleared!")
