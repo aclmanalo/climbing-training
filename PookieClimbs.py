@@ -9,7 +9,7 @@ conn = sqlite3.connect("training_pookie_log.db", check_same_thread=False)
 cursor = conn.cursor()
 
 # Create a table if it doesn’t exist
-cursor.execute(''''
+cursor.execute('''
     CREATE TABLE IF NOT EXISTS workouts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         exercise TEXT,
@@ -18,7 +18,7 @@ cursor.execute(''''
         rpe INTEGER,
         date TEXT
     )
-'''')
+''')
 conn.commit()
 
 # Title
