@@ -5,9 +5,14 @@ from datetime import date
 
 
 # Connect to SQLite database (creates file if it doesn't exist)
-conn = sqlite3.connect("training_pookie_log.db", check_same_thread=False)
+conn = sqlite3.connect("new_training_log.db")
 cursor = conn.cursor()
 
+# Add the date column if it's missing
+cursor.execute("ALTER TABLE workouts ADD COLUMN date TEXT")
+
+conn.commit()
+conn.close()
 # Create a table if it doesn’t exist
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS workouts (
@@ -53,6 +58,9 @@ if st.button("Add Entry"):
 
 
 
+
 # Add space
 st.markdown("<br><br>", unsafe_allow_html=True)  # Adds two line breaks
+
+
 
