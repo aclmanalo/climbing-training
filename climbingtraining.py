@@ -1,23 +1,37 @@
 import streamlit as st
+import sqlite3
 import pandas as pd
 
+# Connect to SQLite database
+conn = sqlite3.connect("training_log.db", check_same_thread=False)
+cursor = conn.cursor()
+
 # Title
-st.title("🏋️‍♂️ Training Log")
+st.title("🏋️‍♂️ Training Log with SQLite")
 
-# Define initial data
-if "training_log" not in st.session_state:
-    st.session_state.training_log = pd.DataFrame({
-        "Exercise": ["Squat", "Bench Press", "Deadlift", "Overhead Press"],
-        "Reps": [5, 5, 5, 5],
-        "Sets": [3, 3, 3, 3],
-        "RPE": [7, 7, 7, 7]
-    })
+# Fetch data from database
+df = pd.read_sql("SELECT * FROM workouts", conn)
 
-# Editable table
-st.write("### Training Log")
-edited_df = st.data_editor(st.session_state.training_log, key="training_table")
+# Filter options
+st.write("### View Past Workouts")
 
-# Update session state
-if st.button("Save Changes"):
-    st.session_state.training_log = edited_df
-    st.success("Training log updated!")
+# Search by exercise name
+search_term = st.text_input("🔍 Search Exercise", "").strip().lower()
+if search_term:
+    df = df[df["exercise"].str.lower().str.contains(search_term, na=False)]
+
+# Sorting options
+sort_by = st.selectbox("Sort by", ["Newest First", "Oldest First"])
+if sort_by == "Newest First":
+    df = df.sort_values(by="id", ascending=False)
+else:
+    df = df.sort_values(by="id", ascending=True)
+
+# Display filtered data
+st.data_editor(df.drop(columns=["id"]), key="training_table", hide_index=True)
+
+# Option to clear all logs
+if st.button("Clear Log"):
+    cursor.execute("DELETE FROM workouts")
+    conn.commit()
+    st.warning("Training log cleared!")
