@@ -29,7 +29,7 @@ st.title("🏋️‍♂️ Training Log")
 # Define initial data
 if "training_log" not in st.session_state:
     st.session_state.training_log = pd.DataFrame({
-        "Exercise": ["Squat", "Bench Press", "Deadlift", "Overhead Press"],
+        "Exercise": ["Squat", "Bench Press", "Deadlift", "Overhead Press", hide_index=True],
         "Reps": [5, 5, 5, 5],
         "Sets": [3, 3, 3, 3],
         "RPE": [7, 7, 7, 7]
