@@ -12,6 +12,7 @@ cursor = conn.cursor()
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS workouts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        date TEXT,
         exercise TEXT,
         reps INTEGER,
         sets INTEGER,
