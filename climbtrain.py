@@ -21,7 +21,7 @@ df = pd.DataFrame(list(st.session_state.one_rep_max.items()), columns=["Exercise
 
 # Editable table
 st.write("### Your 1RM Table")
-edited_df = st.data_editor(df, key="editable_table")
+edited_df = st.data_editor(df, key="editable_table", hide_index=True)
 
 # Title
 st.title("🏋️‍♂️ Training Log")
@@ -29,7 +29,7 @@ st.title("🏋️‍♂️ Training Log")
 # Define initial data
 if "training_log" not in st.session_state:
     st.session_state.training_log = pd.DataFrame({
-        "Exercise": ["Squat", "Bench Press", "Deadlift", "Overhead Press", hide_index=True],
+        "Exercise": ["Squat", "Bench Press", "Deadlift", "Overhead Press"],
         "Reps": [5, 5, 5, 5],
         "Sets": [3, 3, 3, 3],
         "RPE": [7, 7, 7, 7]
