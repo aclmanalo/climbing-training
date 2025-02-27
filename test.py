@@ -87,4 +87,4 @@ if not df.empty:
 
 # Display the filtered table
 st.write("### Training Log")
-st.data_editor(df.drop(columns=["id"]), key="training_table", hide_index=True)
+st.data_editor(df.drop(columns=["id"]), key="training_table_history", hide_index=True)
