@@ -56,3 +56,14 @@ if st.button("Add Entry"):
 st.markdown("<br><br>", unsafe_allow_html=True)  # Adds two line breaks
 
 
+# Fetch data from database
+df = pd.read_sql("SELECT * FROM workouts", conn)
+
+# Convert date column to proper format
+df["date"] = pd.to_datetime(df["date"])
+
+# Display the updated log
+st.write("### Training Log")
+st.data_editor(df.drop(columns=["id"]), key="training_table", hide_index=True)
+
+
