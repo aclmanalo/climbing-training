@@ -45,6 +45,13 @@ if st.button("Add Entry"):
         conn.commit()
         st.success("Workout entry added!")
 
+
+
+# Add space
+st.markdown("<br><br>", unsafe_allow_html=True)  # Adds two line breaks
+
+
+
 # Title
 st.title("History")
 
