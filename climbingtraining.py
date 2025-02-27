@@ -19,7 +19,7 @@ cursor.execute('''
 conn.commit()
 
 # Title
-st.title("🏋️‍♂️ Training Log with SQLite")
+st.title("Input Exercise")
 
 # User input for a new workout entry
 st.write("### Add New Workout Entry")
@@ -46,7 +46,7 @@ if st.button("Add Entry"):
         st.success("Workout entry added!")
 
 # Title
-st.title("🏋️‍♂️ Training Log with SQLite")
+st.title("History")
 
 # Fetch data from database
 df = pd.read_sql("SELECT * FROM workouts", conn)
