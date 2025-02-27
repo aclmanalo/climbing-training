@@ -1,12 +1,13 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
+from datetime import date
 
-# Connect to SQLite database (creates file if it doesn't exist)
+# Connect to SQLite database
 conn = sqlite3.connect("training_log.db", check_same_thread=False)
 cursor = conn.cursor()
 
-# Create a table if it doesn’t exist
+# Create table with a date column if it doesn't exist
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS workouts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,13 +20,12 @@ cursor.execute('''
 ''')
 conn.commit()
 
-
 # Title
-st.title("🏋️‍♂️ Training Log with SQLite")
+st.title("🏋️‍♂️ Training Log with Dates")
 
 # User input for a new workout entry
 st.write("### Add New Workout Entry")
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3, col4, col5 = st.columns(5)
 
 with col1:
     exercise = st.text_input("Exercise")
@@ -75,3 +75,4 @@ if st.button("Clear Log"):
     cursor.execute("DELETE FROM workouts")
     conn.commit()
     st.warning("Training log cleared!")
+
