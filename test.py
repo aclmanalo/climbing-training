@@ -88,3 +88,9 @@ if not df.empty:
 # Display the filtered table
 st.write("### Training Log")
 st.data_editor(df.drop(columns=["id"]), key="training_table_history", hide_index=True)
+
+# Option to clear all logs
+if st.button("Clear Log"):
+    cursor.execute("DELETE FROM workouts")
+    conn.commit()
+    st.warning("Training log cleared!")
