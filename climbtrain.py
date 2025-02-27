@@ -37,7 +37,7 @@ if "training_log" not in st.session_state:
 
 # Editable table
 st.write("### Training Log")
-edited_df = st.data_editor(st.session_state.training_log, key="training_table")
+edited_df = st.data_editor(st.session_state.training_log, key="training_table", hide_index=True)
 
 # Update session state
 if st.button("Save Changes"):
