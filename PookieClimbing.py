@@ -22,7 +22,7 @@ cursor.execute('''
 conn.commit()
 
 # Title
-st.title("Pookie's Training Log")
+st.title("Pookie is Strong")
 
 # User input for new workout entry
 st.write("### Add a New Workout Entry")
