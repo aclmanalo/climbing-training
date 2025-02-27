@@ -11,8 +11,6 @@ cursor = conn.cursor()
 # Add the date column if it's missing
 cursor.execute("ALTER TABLE workouts ADD COLUMN date TEXT")
 
-conn.commit()
-conn.close()
 # Create a table if it doesn’t exist
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS workouts (
