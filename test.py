@@ -62,3 +62,29 @@ df["date"] = pd.to_datetime(df["date"])
 # Display the table with past workouts
 st.write("### Training Log")
 st.data_editor(df.drop(columns=["id"]), key="training_table", hide_index=True)
+
+# --- Search and Filter Section ---
+st.write("### Search Workouts")
+
+# Search input for exercise name
+search_query = st.text_input("Search by Exercise Name", "")
+
+# Date range filter
+col1, col2 = st.columns(2)
+with col1:
+    start_date = st.date_input("Start Date", df["date"].min().date() if not df.empty else date.today())
+with col2:
+    end_date = st.date_input("End Date", df["date"].max().date() if not df.empty else date.today())
+
+# Apply filters
+if not df.empty:
+    # Filter by exercise name (case insensitive)
+    if search_query:
+        df = df[df["exercise"].str.contains(search_query, case=False, na=False)]
+
+    # Filter by date range
+    df = df[(df["date"] >= pd.to_datetime(start_date)) & (df["date"] <= pd.to_datetime(end_date))]
+
+# Display the filtered table
+st.write("### Training Log")
+st.data_editor(df.drop(columns=["id"]), key="training_table", hide_index=True)
