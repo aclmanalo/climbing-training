@@ -5,7 +5,7 @@ from datetime import date
 
 
 # Connect to SQLite database (creates file if it doesn't exist)
-conn = sqlite3.connect("training_log.db", check_same_thread=False)
+conn = sqlite3.connect("training_pookie_log.db", check_same_thread=False)
 cursor = conn.cursor()
 
 # Create a table if it doesn’t exist
