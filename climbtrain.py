@@ -23,12 +23,6 @@ df = pd.DataFrame(list(st.session_state.one_rep_max.items()), columns=["Exercise
 st.write("### Your 1RM Table")
 edited_df = st.data_editor(df, key="editable_table")
 
-# Update session state
-if st.button("Save Changes"):
-    for index, row in edited_df.iterrows():
-        st.session_state.one_rep_max[row["Exercise"]] = row["1RM (kg)"]
-    st.success("1RM values updated!")
-
 # Title
 st.title("🏋️‍♂️ Training Log")
 
